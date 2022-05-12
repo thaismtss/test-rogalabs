@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+}
+
+.pagination {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+
+}
+
+.list {
+    width: 80vw;
+}
+
+.user {
+    border-radius: 5px;
+    box-shadow: 0px 30px 40px -20px rgba(0, 0, 0, 0.129);
+    padding: 5px; 
+    border-top: 3px solid rgb(13, 124, 152);
+}
+
+.user i {
+    padding: 5px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 20px;
+}
+
+.controls .numbers {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controls .numbers div {
+    font-weight: 600;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.controls .numbers div.active {
+    background-color: rgb(13, 124, 152);
+    color: white;
+}
+
+.first, .prev, .next, .last {
+    cursor: pointer;
+    padding: 20px;
+    font-size: 20px
+} 
