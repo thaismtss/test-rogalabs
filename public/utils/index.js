@@ -1,5 +1,11 @@
 const { faker } = require('@faker-js/faker')
 
+/**
+ * Create Array with users faker.
+ * 
+ * @param {number} quantityItems 
+ * @returns {object}
+ */
 function createUsers (quantityItems) { 
     const data = Array.from({length: quantityItems}).map((_) => {
         return {
@@ -10,11 +16,21 @@ function createUsers (quantityItems) {
     return data
 }
 
-
+/**
+ * Get querySelector element.
+ * 
+ * @param {string} element 
+ * @returns {HTMLElement}
+ */
 function getHtml(element) {
     return document.querySelector(element)
 }
 
+/**
+ * Create div and insert in Html.
+ *
+ * @param {object} user 
+ */
 function createItem(user) {
     const div = `
     <div class='user'>
@@ -26,7 +42,12 @@ function createItem(user) {
 
 }
 
-function calculateMaxButtonsViible (initState) {
+/**
+ * Calculete max buttons visible in Dom. 
+ * @param {object} initState 
+ * @returns {object}
+ */
+function calculateMaxButtonsVisible (initState) {
     const maxButtonsVisible = initState.maxPages
 
     let maxLeft = (initState.page - Math.floor(maxButtonsVisible / 2))
@@ -48,6 +69,11 @@ function calculateMaxButtonsViible (initState) {
 
 }
 
+/**
+ * Create buttons pagination and insert in Dom.
+ * @param {number} page 
+ * @param {object} initState 
+ */
 function createButtons(page, initState) {
     const button = document.createElement('div')
     button.innerHTML = page
@@ -68,15 +94,23 @@ function createButtons(page, initState) {
 
 }
 
+/**
+ * Update buttons in Dom
+ * @param {objecet} initState 
+ */
 function updateButtons (initState) {
     getHtml('.controls .numbers').innerHTML = ""
     
-    const { maxLeft, maxRight} = calculateMaxButtonsViible(initState)
+    const { maxLeft, maxRight} = calculateMaxButtonsVisible(initState)
     for (let page = maxLeft; page <= maxRight; page++) {
         createButtons(page, initState)
     }
 }
 
+/**
+ * Update items in Dom
+ * @param {object} initState 
+ */
 function updtadeItem(initState) {
     getHtml('.list').innerHTML = ""
     
@@ -91,11 +125,19 @@ function updtadeItem(initState) {
     
 }
 
+/**
+ * Update page.
+ * @param {object} initState 
+ */
 function updatePagination(initState) {
     updtadeItem(initState)
     updateButtons(initState)
 }
 
+/**
+ * Skip to next page.
+ * @param {object} initState 
+ */
 function next(initState) {
     initState.page++
 
@@ -106,6 +148,10 @@ function next(initState) {
     }
 }
 
+/**
+ * Go back to the previous page.
+ * @param {object} initState 
+ */
 function prev(initState) {
     initState.page--
 
@@ -114,6 +160,11 @@ function prev(initState) {
     }
 }
 
+/**
+ * Go to specified page.
+ * @param {number} page 
+ * @param {object} initState 
+ */
 function goToPage(page, initState) {
     if (page < 1) {
         page = 1
@@ -126,6 +177,10 @@ function goToPage(page, initState) {
     }
 }
 
+/**
+ * Add event listeners in buttons pagination.
+ * @param {object} initState 
+ */
 function createListenersConstrols(initState) {
     getHtml('.first').addEventListener('click', () => {
         goToPage(1, initState)
