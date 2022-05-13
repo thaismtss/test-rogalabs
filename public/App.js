@@ -1,4 +1,4 @@
-export function App() {
+module.exports.App = () => {
     return `
     <div class='pagination'>
         <div class='list'></div>

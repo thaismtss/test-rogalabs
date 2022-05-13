@@ -1,5 +1,5 @@
-import { App } from './App.js';
-import {  updatePagination, createListenersConstrols } from './utils/index.js'
+const { App } = require('./App.js')
+const { updatePagination, createListenersConstrols }  = require('./utils/index.js')
 
 var initState = {
     page: 1,

@@ -1,8 +1,6 @@
-import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
-import { goToPage } from './constrols.js'
-export * from './constrols.js'
+const { faker } = require('@faker-js/faker')
 
-export function createUsers (quantityItems) { 
+function createUsers (quantityItems) { 
     const data = Array.from({length: quantityItems}).map((_) => {
         return {
             name: faker.name.findName(),
@@ -12,7 +10,8 @@ export function createUsers (quantityItems) {
     return data
 }
 
-export function getHtml (element) {
+
+function getHtml(element) {
     return document.querySelector(element)
 }
 
@@ -78,7 +77,6 @@ function updateButtons (initState) {
     }
 }
 
-
 function updtadeItem(initState) {
     getHtml('.list').innerHTML = ""
     
@@ -93,7 +91,65 @@ function updtadeItem(initState) {
     
 }
 
-export function updatePagination(initState) {
+function updatePagination(initState) {
     updtadeItem(initState)
     updateButtons(initState)
 }
+
+function next(initState) {
+    initState.page++
+
+    const lastPage = initState.page > initState.totalPage
+
+    if(lastPage) {
+        initState.page--
+    }
+}
+
+function prev(initState) {
+    initState.page--
+
+    if ( initState.page < 1) {
+        initState.page++
+    }
+}
+
+function goToPage(page, initState) {
+    if (page < 1) {
+        page = 1
+    }
+
+    initState.page = +page
+
+    if (page > initState.totalPage) {
+        initState.page = initState.totalPage
+    }
+}
+
+function createListenersConstrols(initState) {
+    getHtml('.first').addEventListener('click', () => {
+        goToPage(1, initState)
+        updatePagination(initState)
+    })
+
+    getHtml('.last').addEventListener('click', () => {
+        goToPage(initState.totalPage, initState)
+        updatePagination(initState)
+    })
+
+    getHtml('.next').addEventListener('click', () => {
+        next(initState)
+        updatePagination(initState)
+    })
+
+    getHtml('.prev').addEventListener('click', () => {
+        prev(initState)
+        updatePagination(initState)
+    })
+
+}
+
+module.exports.createUsers = createUsers;
+module.exports.getHtml = getHtml;
+module.exports.updatePagination = updatePagination;
+module.exports.createListenersConstrols = createListenersConstrols
