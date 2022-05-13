@@ -1,4 +1,4 @@
-import { App } from '/App.js';
+import { App } from './App.js';
 import {  updatePagination, createListenersConstrols } from './utils/index.js'
 
 var initState = {
